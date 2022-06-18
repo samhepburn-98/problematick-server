@@ -32,6 +32,16 @@ router.route("/item/:id").get((req, res) => {
         });
 });
 
+// Get a random item
+router.route("/rand").get(async (req, res) => {
+    let db_connect = conn.getDb();
+    const result = await db_connect
+        .collection("items")
+        .aggregate([{ $sample: { size: 1 } }])
+        .next();
+    res.json(result);
+});
+
 // Create a new item
 router.route("/item/add").post((req, response) => {
     let db_connect = conn.getDb();
