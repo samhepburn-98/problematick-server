@@ -1,9 +1,9 @@
-import { AnyError, MongoClient } from "mongodb";
+import { AnyError, Db, MongoClient } from "mongodb";
 import { uri } from "../config";
 
 const client = new MongoClient(uri, {});
 
-let _db: any;
+let _db: Db;
 
 export const conn = {
     connectToServer: (callback: (arg0: AnyError | undefined) => void) => {
